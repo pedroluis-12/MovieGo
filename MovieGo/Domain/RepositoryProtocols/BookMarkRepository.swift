@@ -8,7 +8,7 @@ public class BookmarkRepository {
     private var bookmarkedMovies = Set<Int>()
     private let persistentContainer: NSPersistentContainer
     
-    private init(persistentContainer: NSPersistentContainer = NSPersistentContainer(name: "YourCoreDataModel")) {
+    private init(persistentContainer: NSPersistentContainer = NSPersistentContainer(name: "MovieGo2")) {
         self.persistentContainer = persistentContainer
         persistentContainer.loadPersistentStores { _, error in
             if let error = error {
@@ -36,8 +36,7 @@ public class BookmarkRepository {
     }
     
     private func saveMovieToCoreData(movie: Movie) {
-        let context = persistentContainer.viewContext
-        let movieEntity = MovieEntity(context: context)
+        let movieEntity = MovieEntity(context: persistentContainer.viewContext)
         movieEntity.id = Int64(movie.id)
         movieEntity.title = movie.title
         movieEntity.overview = movie.overview
@@ -70,7 +69,7 @@ public class BookmarkRepository {
         let fetchRequest: NSFetchRequest<MovieEntity> = MovieEntity.fetchRequest()
         do {
             let movieEntities = try context.fetch(fetchRequest)
-            return movieEntities.map { $0.toDomain() }
+            return movieEntities.map { Movie(id: Int($0.id), title: $0.title ?? "", overview: $0.overview ?? "", posterPath: $0.posterPath)}
         } catch {
             print("Failed to fetch movies from Core Data: \(error)")
             return []

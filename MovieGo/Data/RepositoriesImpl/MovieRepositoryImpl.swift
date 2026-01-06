@@ -22,12 +22,9 @@ public class MovieRepositoryImpl: MovieRepository {
         service.fetchPopularMovies { result in
             switch result {
             case .success(let movies):
-                // menyimpan pada core-data
                 self.saveMoviesToCoreData(movies: movies)
-                // melajutkan untuk ditampilkan
                 completion(.success(movies))
             case .failure(let error):
-                // Jika gagal ambil dari API, coba ambil dari Core Data
                 let movies = self.fetchMoviesFromCoreData()
                 if !movies.isEmpty {
                     completion(.success(movies))
@@ -43,7 +40,6 @@ public class MovieRepositoryImpl: MovieRepository {
         service.searchMovies(query: query) { result in
             switch result {
             case .success(let movies):
-                // Opsional: Simpan hasil pencarian ke Core Data jika diinginkan
                 completion(.success(movies))
             case .failure(let error):
                 completion(.failure(error))
@@ -69,11 +65,6 @@ public class MovieRepositoryImpl: MovieRepository {
         }
     }
     
-    // MARK: - Get Movie Videos
-//    public func getMovieVideos(movieId: Int, completion: @escaping (Result<[Video], Error>) -> Void) {
-//                tmdbService.fetchMovieVideos(movieId: movieId, completion: completion)
-//            }
-    
     // MARK: - Private Helper Methods
     
     private func saveMoviesToCoreData(movies: [Movie]) {
@@ -87,14 +78,12 @@ public class MovieRepositoryImpl: MovieRepository {
             print("Failed to delete existing movies: \(error)")
         }
         
-        // Simpan data baru
         for movie in movies {
             let movieEntity = MovieEntity(context: context)
             movieEntity.id = Int64(movie.id)
             movieEntity.title = movie.title
             movieEntity.overview = movie.overview
             movieEntity.posterPath = movie.posterPath
-            // Set properti lain sesuai entitas jika ada
         }
         
         do {
@@ -109,7 +98,7 @@ public class MovieRepositoryImpl: MovieRepository {
         let fetchRequest: NSFetchRequest<MovieEntity> = MovieEntity.fetchRequest()
         do {
             let movieEntities = try context.fetch(fetchRequest)
-            return movieEntities.map { $0.toDomain() }
+            return movieEntities.map { Movie(id: Int($0.id), title: $0.title ?? "", overview: $0.overview ?? "", posterPath: $0.posterPath) }
         } catch {
             print("Failed to fetch movies from Core Data: \(error)")
             return []

@@ -26,7 +26,7 @@ struct MovieListView: View {
                 
                 // Movie List
                 if viewModel.isLoading {
-                    ProgressView("Loading...")
+                    ProgressView("Carregando...")
                         .padding()
                 } else {
                     List(viewModel.movies) { movie in
@@ -61,7 +61,7 @@ struct MovieListView: View {
                     .listStyle(PlainListStyle())
                 }
             }
-            .navigationTitle("Popular Movies")
+            .navigationTitle("Filmes Populares")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(destination: BookmarkListView()){
@@ -73,7 +73,7 @@ struct MovieListView: View {
                 }
             }
             .alert(item: $viewModel.errorMessage) { errorMessage in
-                Alert(title: Text("Error"), message: Text(errorMessage), dismissButton: .default(Text("OK")))
+                Alert(title: Text("Erro"), message: Text(errorMessage), dismissButton: .default(Text("OK")))
             }
         }
     }

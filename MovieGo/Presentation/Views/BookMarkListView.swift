@@ -5,7 +5,7 @@ import CoreData
 struct BookmarkListView: View {
     @StateObject private var viewModel: BookmarkListViewModel
 
-    init(movieRepository: MovieRepository = MovieRepositoryImpl(service: MovieService(), persistentContainer: NSPersistentContainer(name: "YourCoreDataModel"))) {
+    init(movieRepository: MovieRepository = MovieRepositoryImpl(service: MovieService(), persistentContainer: NSPersistentContainer(name: "MovieGo2"))) {
         _viewModel = StateObject(wrappedValue: BookmarkListViewModel(movieRepository: movieRepository))
     }
     

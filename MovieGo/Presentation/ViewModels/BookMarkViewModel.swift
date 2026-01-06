@@ -10,16 +10,13 @@ class BookmarkListViewModel: ObservableObject {
         self.bookmarkRepository = bookmarkRepository
         self.movieRepository = movieRepository
         
-        // Muat bookmark dari Core Data saat inisialisasi ViewModel
         loadBookmarkedMoviesFromCoreData()
     }
     
     func loadBookmarkedMovies() {
         let bookmarkedIds = bookmarkRepository.getAllBookmarkedMovies()
-        bookmarkedMovies = [] // Kosongkan daftar terlebih dahulu untuk menghindari duplikasi
         
         if bookmarkedIds.isEmpty {
-            // Jika tidak ada bookmark online, tetap gunakan data dari Core Data
             loadBookmarkedMoviesFromCoreData()
             return
         }

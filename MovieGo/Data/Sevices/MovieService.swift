@@ -8,7 +8,7 @@
 import Foundation
 
 public struct MovieService {
-    private let apiKey = "045bbac535c09e7474a323c053fcae90" // Ganti dengan API Key Anda
+    private let apiKey = "045bbac535c09e7474a323c053fcae90"
     private let baseURL = "https://api.themoviedb.org/3"
 
     public init() {}

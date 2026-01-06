@@ -28,7 +28,6 @@ public class MovieListViewModel: ObservableObject {
     }
 
     private func setupBindings() {
-        // Observe perubahan pada searchText dengan debounce untuk menghindari panggilan API berlebihan
         $searchText
             .debounce(for: .milliseconds(500), scheduler: RunLoop.main)
             .removeDuplicates()
@@ -93,7 +92,6 @@ public class MovieListViewModel: ObservableObject {
     }
 }
 
-// Tambahkan ekstensi ini untuk mengonversi String menjadi Identifiable
 extension String: Identifiable {
     public var id: String { self }
 }
