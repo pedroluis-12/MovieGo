@@ -1,17 +1,11 @@
 //
 //  MovieListView.swift
-//  tmdb
 //
-//  Created by Aulia Octaviani on 24/10/24.
+//  Created by Pedro Luis Martins Coelho on 05/01/26.
 //
-
-// Presentation/Views/MovieListView.swift
 
 import SwiftUI
 import Kingfisher
-
-
-// Presentation/Views/MovieListView.swift
 
 struct MovieListView: View {
     @ObservedObject var viewModel: MovieListViewModel
@@ -64,8 +58,7 @@ struct MovieListView: View {
             .navigationTitle("Filmes Populares")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: BookmarkListView()){
-//                    NavigationLink(destination: BookmarkListView(viewModel: BookmarkListViewModel(getMovieDetailUseCase: getMovieDetailUseCase))) {
+                    NavigationLink(destination: MovieMarkListView()){
                         Image(systemName: "bookmark.fill")
                             .imageScale(.large)
                             .foregroundColor(.blue)
@@ -78,7 +71,6 @@ struct MovieListView: View {
         }
     }
     
-    // Fungsi untuk membuat Detail View dengan ViewModel yang diperlukan
     @ViewBuilder
     private func createDetailView(for movie: Movie) -> some View {
         let detailViewModel = MovieDetailViewModel(

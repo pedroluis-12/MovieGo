@@ -1,11 +1,8 @@
 //
 //  MoviewDetailView.swift
-//  tmdb
 //
-//  Created by Aulia Octaviani on 24/10/24.
+//  Created by Pedro Luis Martins Coelho on 05/01/26.
 //
-
-//// Presentation/Views/MovieDetailView.swift
 
 import SwiftUI
 import Kingfisher
@@ -45,12 +42,12 @@ struct MovieDetailView: View {
                     
                     Spacer()
                     
-                    // Tombol Bookmark
+                    // Tombol Moviemark
                     Button(action: {
-                        viewModel.toggleBookmark()
+                        viewModel.togglemovieMark()
                     }) {
-                        Image(systemName: viewModel.isBookmarked ? "bookmark.fill" : "bookmark")
-                            .foregroundColor(viewModel.isBookmarked ? .yellow : .gray)
+                        Image(systemName: viewModel.isMoviemarked ? "bookmark.fill" : "bookmark")
+                            .foregroundColor(viewModel.isMoviemarked ? .yellow : .gray)
                             .imageScale(.large)
                             .padding()
                     }
@@ -62,11 +59,6 @@ struct MovieDetailView: View {
                 Text(viewModel.movieDetail?.overview ?? "No overview available.")
                     .font(.body)
                     .multilineTextAlignment(.leading)
-                
-                // Tambahkan informasi tambahan jika ada
-                // Contoh:
-                // Text("Release Date: \(viewModel.movieDetail?.releaseDate ?? "N/A")")
-                // Text("Rating: \(viewModel.movieDetail?.voteAverage ?? 0)/10")
                 
                 Spacer()
             }

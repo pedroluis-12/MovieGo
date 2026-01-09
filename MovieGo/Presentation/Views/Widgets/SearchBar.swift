@@ -1,11 +1,8 @@
 //
 //  SearchBar.swift
-//  tmdb
 //
-//  Created by Aulia Octaviani on 25/10/24.
+//  Created by Pedro Luis Martins Coelho on 05/01/26.
 //
-
-// Presentation/Views/SearchBar.swift
 
 import SwiftUI
 
@@ -42,7 +39,7 @@ struct SearchBar: UIViewRepresentable {
     func makeUIView(context: UIViewRepresentableContext<SearchBar>) -> UISearchBar {
         let searchBar = UISearchBar(frame: .zero)
         searchBar.delegate = context.coordinator
-        searchBar.placeholder = "Pesquise Filmes"
+        searchBar.placeholder = "Pesquisar Filmes"
         return searchBar
     }
 

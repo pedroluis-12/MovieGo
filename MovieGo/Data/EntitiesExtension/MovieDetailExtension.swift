@@ -8,7 +8,7 @@
 import Foundation
 
 extension MovieDetail {
-    public var isBookmarked: Bool {
-        BookmarkRepository.shared.isBookmarked(movieId: self.id)
+    public var isMovieMarked: Bool {
+        MovieMarkRepository.shared.isMovieMarked(movieId: self.id)
     }
 }

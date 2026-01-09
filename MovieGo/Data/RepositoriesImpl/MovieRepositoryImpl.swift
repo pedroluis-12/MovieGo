@@ -52,10 +52,8 @@ public class MovieRepositoryImpl: MovieRepository {
         service.fetchMovieDetail(movieId: movieId) { result in
             switch result {
             case .success(let movieDetail):
-                // Opsional: Simpan detail movie ke Core Data jika diinginkan
                 completion(.success(movieDetail))
             case .failure(let error):
-                // Jika gagal ambil dari API, coba ambil dari Core Data
                 if let movieDetail = self.fetchMovieDetailFromCoreData(movieId: movieId) {
                     completion(.success(movieDetail))
                 } else {

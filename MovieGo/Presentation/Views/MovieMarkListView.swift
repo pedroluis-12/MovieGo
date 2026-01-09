@@ -2,16 +2,16 @@ import SwiftUI
 import Kingfisher
 import CoreData
 
-struct BookmarkListView: View {
-    @StateObject private var viewModel: BookmarkListViewModel
+struct MovieMarkListView: View {
+    @StateObject private var viewModel: MovieMarkListViewModel
 
     init(movieRepository: MovieRepository = MovieRepositoryImpl(service: MovieService(), persistentContainer: NSPersistentContainer(name: "MovieGo2"))) {
-        _viewModel = StateObject(wrappedValue: BookmarkListViewModel(movieRepository: movieRepository))
+        _viewModel = StateObject(wrappedValue: MovieMarkListViewModel(movieRepository: movieRepository))
     }
     
     var body: some View {
         NavigationView {
-            List(viewModel.bookmarkedMovies) { movie in
+            List(viewModel.movieMarkedMovies) { movie in
                 HStack {
                     if let posterPath = movie.posterPath,
                        let url = URL(string: "https://image.tmdb.org/t/p/w200\(posterPath)") {
@@ -37,9 +37,9 @@ struct BookmarkListView: View {
                     }
                 }
             }
-            .navigationTitle("Bookmarks")
+            .navigationTitle("Filmes Favoritos")
             .onAppear {
-                viewModel.loadBookmarkedMovies()
+                viewModel.loadmovieMarkedMovies()
             }
         }
     }

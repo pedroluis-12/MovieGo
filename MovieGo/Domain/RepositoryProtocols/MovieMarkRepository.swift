@@ -1,11 +1,9 @@
-// Domain/Repositories/BookmarkRepository.swift
-
 import Foundation
 import CoreData
 
-public class BookmarkRepository {
-    public static let shared = BookmarkRepository()
-    private var bookmarkedMovies = Set<Int>()
+public class MovieMarkRepository {
+    public static let shared = MovieMarkRepository()
+    private var movieMarkedMovies = Set<Int>()
     private let persistentContainer: NSPersistentContainer
     
     private init(persistentContainer: NSPersistentContainer = NSPersistentContainer(name: "MovieGo2")) {
@@ -17,26 +15,27 @@ public class BookmarkRepository {
         }
     }
     
-    public func isBookmarked(movieId: Int) -> Bool {
-        return bookmarkedMovies.contains(movieId)
+    public func isMovieMarked(movieId: Int) -> Bool {
+        return movieMarkedMovies.contains(movieId)
     }
     
-    public func addBookmark(movie: Movie) {
-        bookmarkedMovies.insert(movie.id)
+    public func addMovieMark(movie: Movie) {
+        movieMarkedMovies.insert(movie.id)
         saveMovieToCoreData(movie: movie)
     }
     
-    public func removeBookmark(movieId: Int) {
-        bookmarkedMovies.remove(movieId)
+    public func removeMovieMark(movieId: Int) {
+        movieMarkedMovies.remove(movieId)
         deleteMovieFromCoreData(movieId: movieId)
     }
     
-    public func getAllBookmarkedMovies() -> [Int] {
-        return Array(bookmarkedMovies)
+    public func getAllMovieMarkedMovies() -> [Int] {
+        return Array(movieMarkedMovies)
     }
     
     private func saveMovieToCoreData(movie: Movie) {
-        let movieEntity = MovieEntity(context: persistentContainer.viewContext)
+        let context = persistentContainer.viewContext
+        let movieEntity = MovieEntity(context: context)
         movieEntity.id = Int64(movie.id)
         movieEntity.title = movie.title
         movieEntity.overview = movie.overview
@@ -64,7 +63,7 @@ public class BookmarkRepository {
         }
     }
     
-    public func loadBookmarksFromCoreData() -> [Movie] {
+    public func loadMovieMarksFromCoreData() -> [Movie] {
         let context = persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<MovieEntity> = MovieEntity.fetchRequest()
         do {

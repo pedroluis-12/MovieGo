@@ -1,11 +1,8 @@
 //
 //  CacheAsynImage.swift
-//  tmdb
 //
-//  Created by Aulia Octaviani on 25/10/24.
+//  Created by Pedro Luis Martins Coelho on 05/01/26.
 //
-
-// Presentation/Views/CachedAsyncImage.swift
 
 import SwiftUI
 
