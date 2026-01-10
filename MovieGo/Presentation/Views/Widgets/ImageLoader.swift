@@ -24,13 +24,11 @@ class ImageLoader: ObservableObject {
     }
     
     func load() {
-        // Cek cache terlebih dahulu
         if let cachedImage = cache.getImage(for: url) {
             self.image = cachedImage
             return
         }
         
-        // Unduh gambar dari jaringan
         cancellable = URLSession.shared.dataTaskPublisher(for: url)
             .map { UIImage(data: $0.data) }
             .replaceError(with: nil)

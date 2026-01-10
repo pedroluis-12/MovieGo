@@ -1,11 +1,8 @@
 //
 //  ImageCache.swift
-//  MovieGo
 //
 //  Created by Pedro Luis Martins Coelho on 05/01/26.
 //
-
-// Data/Services/ImageCache.swift
 
 import UIKit
 
@@ -16,10 +13,8 @@ class ImageCache {
     private let fileManager = FileManager.default
     
     private init() {
-        // Mendapatkan direktori cache
         cacheDirectory = fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first!
         
-        // Membuat direktori untuk gambar jika belum ada
         let imagesDirectory = cacheDirectory.appendingPathComponent("images")
         if !fileManager.fileExists(atPath: imagesDirectory.path) {
             try? fileManager.createDirectory(at: imagesDirectory, withIntermediateDirectories: true, attributes: nil)

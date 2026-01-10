@@ -1,6 +1,5 @@
 //
 //  MovieRepositoryImpl.swift
-//  MovieGo
 //
 //  Created by Pedro Luis Martins Coelho on 05/01/26.
 //
@@ -109,10 +108,7 @@ public class MovieRepositoryImpl: MovieRepository {
             let fetchRequest: NSFetchRequest<MovieEntity> = MovieEntity.fetchRequest()
             fetchRequest.predicate = NSPredicate(format: "id == %d", movieId)
             do {
-                if let movieEntity = try context.fetch(fetchRequest).first {
-                    // Konversi MovieEntity ke MovieDetail
-//                    return movieEntity.toMovieDetail()
-                }
+                if let movieEntity = try context.fetch(fetchRequest).first {}
             } catch {
                 print("Failed to fetch movie detail from Core Data: \(error)")
             }
