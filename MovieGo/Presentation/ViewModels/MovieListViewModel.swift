@@ -75,13 +75,13 @@ public class MovieListViewModel: ObservableObject {
         if let networkError = error as? NetworkError {
             switch networkError {
             case .invalidURL:
-                self.errorMessage = "URL tidak valid."
+                self.errorMessage = "URL Inválida"
             case .noData:
-                self.errorMessage = "Tidak ada data yang diterima."
+                self.errorMessage = "Sem dados"
             case .decodingError:
-                self.errorMessage = "Gagal menguraikan data."
+                self.errorMessage = "Erro de decodificação"
             case .unknown:
-                self.errorMessage = "Terjadi kesalahan yang tidak diketahui."
+                self.errorMessage = "Outro Erro"
             }
         } else {
             self.errorMessage = error.localizedDescription
